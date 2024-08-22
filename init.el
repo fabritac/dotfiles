@@ -11,14 +11,14 @@
 
 ; Visual configuration
 (setq visible-bell t)
-; Change cursor  
+; Stretch cursor in special cases
 (setq x-stretch-cursor t)
-; Column number 
+; Column number
 (column-number-mode)
 ; Set font and size
-(set-face-attribute 'default nil :font "Consolas" :height 140)
+;(set-face-attribute 'default nil :font "Consolas" :height 140)
 ;(set-face-attribute 'default nil :font "Lucida Console" :height 140)
-;(set-face-attribute 'default nil :font "Anonymous Pro" :height 140)
+(set-face-attribute 'default nil :font "Anonymous Pro" :height 140)
 ; Set theme
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'wombat t)
@@ -34,7 +34,7 @@
 
 ; Misc
 ; Remember and restore the last cursor location of opened files
-(save-place-mode 1) 
+(save-place-mode 1)
 ; Move customization variables to a separate file and load it
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
 (load custom-file 'noerror 'nomessage)
@@ -48,7 +48,7 @@
 (global-subword-mode 1)
 ; Stop the cursor from changing half of the screen when scrolling
 (setq scroll-conservatively 1000)
-; Disable tabs for indent 
+; Disable tabs for indent
 (setq-default indent-tabs-mode nil)
 ; Delete files in dired moves things to trash
 (setq delete-by-moving-to-trash t)
@@ -63,3 +63,17 @@
 (setopt use-short-answers t)
 ; Make Ctrl+Enter save file
 ;(global-set-key [C-return] 'save-buffer)
+; If in end of file and C-n add new line
+(setq next-line-add-newlines t)
+; Automatically delete trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+; M-/ hippie expand, autocomplete (remember this)
+; Ido mode
+(ido-mode 1)
+(setq ido-enable-flex-matching t)  ; Enable fuzzy matching
+(setq ido-everywhere t)             ; Use ido everywhere
+; Switch between buffers like other apps
+(global-set-key (kbd "<C-tab>") 'bs-cycle-next)
+(global-set-key (kbd "<C-S-tab>") 'bs-cycle-previous)
+; Delete region with C-d
+(delete-selection-mode t)
