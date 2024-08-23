@@ -18,10 +18,12 @@
 ; Set font and size
 ;(set-face-attribute 'default nil :font "Consolas" :height 140)
 ;(set-face-attribute 'default nil :font "Lucida Console" :height 140)
-(set-face-attribute 'default nil :font "Anonymous Pro" :height 140)
+;(set-face-attribute 'default nil :font "Iosevka" :height 140)
+;(set-face-attribute 'default nil :font "Anonymous Pro" :height 140)
+(set-face-attribute 'default nil :font "Fira mono" :height 140)
 ; Set theme
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'wombat t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
 
 ; Melpa
 (require 'package)
