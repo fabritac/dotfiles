@@ -1,18 +1,19 @@
-; Basic config
+;; Basic config
+
 (setq package-enable-at-startup nil
       inhibit-startup-message   t
-      frame-resize-pixelwise    t  ; fine resize
-      package-native-compile    t) ; native compile packages
+      frame-resize-pixelwise    t   ; fine resize
+      package-native-compile    t   ; native compile packages
+      warning-minimum-level :error) ; only show errors
 
 (scroll-bar-mode -1)
 (tooltip-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
-; Visual configuration
+;; Visual configuration
+
 (setq visible-bell t)
-; Stretch cursor in special cases
-(setq x-stretch-cursor t)
 ; Column number
 (column-number-mode)
 ; Set font and size
@@ -25,16 +26,14 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
 
-; Melpa
+;; Melpa
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-; Backup and autosave
-(setq make-backup-files nil)
-(setq auto-save-default nil)
+;; Misc
 
-; Misc
 ; Remember and restore the last cursor location of opened files
 (save-place-mode 1)
 ; Move customization variables to a separate file and load it
@@ -56,9 +55,10 @@
 (setq delete-by-moving-to-trash t)
 ; Dont show message in scratch buffer
 (setq-default initial-scratch-message nil)
-; Auto save and better undo memory
+; Auto save, backups and better undo memory
 (setq undo-limit        100000000
-      auto-save-default t)
+      auto-save-default t
+      make-backup-files nil)
 ; take new window space from all other windows
 (setq window-combination-resize t)
 ; Short answers
@@ -79,3 +79,28 @@
 (global-set-key (kbd "<C-S-tab>") 'bs-cycle-previous)
 ; Delete region with C-d
 (delete-selection-mode t)
+
+;; Package configuration
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+; Add ace-window which-key, and easy-kill using use-package
+(use-package ace-window
+  :bind (("M-o" . ace-window))  ; Bind ace-window to M-o for easy window switching
+  :config
+  (setq aw-scope 'global))      ; Set scope to global for switching between frames
+
+(use-package easy-kill
+  :bind (("M-w" . easy-kill)))  ; Bind M-w to easy-kill for better kill functionality
+
+(use-package which-key
+  :config
+  (which-key-mode)  ; Activate which-key-mode
+  (setq which-key-idle-delay 0.5)  ; Set delay before which-key popup appears
+  (setq which-key-separator " → ")  ; Customize the separator
+  (setq which-key-prefix-prefix "+"))  ; Prefix to indicate more bindings
