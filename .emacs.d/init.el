@@ -20,26 +20,10 @@
 (setq require-final-newline t)
 
 ;; --- Window
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
 ;; --- Custom file
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
-
-;; --- Melpa
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-
-;; --- use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
-(setq use-package-always-ensure t)
-
-;; --- Packages
-(use-package lsp-mode
-  :hook ((prog-mode . lsp))
-  :commands lsp)
