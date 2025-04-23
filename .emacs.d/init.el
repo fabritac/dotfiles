@@ -10,8 +10,9 @@
 (column-number-mode t)
 (global-auto-revert-mode t)
 (global-subword-mode t)
-(display-line-numbers-mode t)
+(global-display-line-numbers-mode t)
 (global-auto-revert-mode t)
+(electric-pair-mode t)
 
 ;; --- Files
 (setq make-backup-files nil)
